@@ -10,7 +10,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get(
     "sqlite:///instance/placement.db"
 )
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.config['SECRET_KEY'] = 'secret'
+app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "secret")
 
 db.init_app(app)
 
