@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Placement Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        body {
+            display: flex;
+            background: #f4f6f9;
+        }
+        /* Sidebar */
+
+.sidebar{
+    width:240px;
+    height:100vh;
+    background:#17233b;
+    color:white;
+    position:fixed;
+    left:0;
+    top:0;
+    padding:20px;
+}
+
+.brand{
+    font-size:28px;
+    font-weight:800;
+    margin-bottom:40px;
+}
+
+.nav-section-title{
+    font-size:13px;
+    color:#7b8ba7;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    margin-bottom:15px;
+}
+
+.nav-link{
+    display:block;
+    color:#d7e2f5;
+    text-decoration:none;
+    padding:14px 16px;
+    border-radius:14px;
+    margin-bottom:8px;
+    transition:.25s;
+    font-size:16px;
+}
+
+.nav-link:hover{
+    background:#2c3850;
+    color:white;
+}
+        .main {
+            margin-left: 240px;
+            width: 100%;
+            padding: 30px;
+        }
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+            gap: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #f1f5f9;
+        }
+        tr {
+            border-bottom: 1px solid #eee;
+        }
+        .btn {
+            padding: 6px 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 12px;
+        }
+        .green { background: #22c55e; color: white; }
+        .red { background: #ef4444; color: white; }
+        .yellow { background: #f59e0b; color: white; }
+        .blue { background: #3b82f6; color: white; }
+        .badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        .b-green { background: #dcfce7; color: #166534; }
+        .b-yellow { background: #fef9c3; color: #854d0e; }
+        .b-red { background: #fee2e2; color: #991b1b; }
+        .b-dark { background: #e5e7eb; color: #111827; }
+        .search-bar{
+    background:white;
+    padding:20px 24px;
+    border-radius:18px;
+    margin-bottom:22px;
+    box-shadow:0 6px 18px rgba(0,0,0,.05);
+}
+
+.search-bar form{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.search-bar input{
+    flex:1;
+    min-width:300px;
+    padding:13px 18px;
+    border:1px solid #d7dce6;
+    border-radius:12px;
+    font-size:15px;
+    outline:none;
+}
+
+.search-bar input:focus{
+    border-color:#2f66df;
+}
+
+.search-bar select{
+    padding:13px 16px;
+    border:1px solid #d7dce6;
+    border-radius:12px;
+    font-size:15px;
+    outline:none;
+    min-width:170px;
+}
+
+.search-btn{
+    background:#2f66df;
+    color:white;
+    border:none;
+    padding:13px 24px;
+    border-radius:12px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.search-btn:hover{
+    background:#2458c7;
+}
+
+.clear-btn{
+    text-decoration:none;
+    background:#eef2f7;
+    color:#172033;
+    padding:13px 22px;
+    border-radius:12px;
+    font-weight:700;
+    transition:.2s;
+}
+
+.clear-btn:hover{
+    background:#dbe4ef;
+}
+    </style>
+</head>
+<body>
+<div class="sidebar">
+
+    <div class="brand">
+        Placement Portal
+    </div>
+
+    <div class="nav-section-title">
+        Admin Panel
+    </div>
+
+    <a class="nav-link" href="/admin/dashboard">
+        Dashboard
+    </a>
+
+    <a class="nav-link" href="/admin/companies">
+        Companies
+    </a>
+
+    <a class="nav-link" href="/admin/students">
+        Students
+    </a>
+
+    <a class="nav-link" href="/admin/drives">
+        Drives
+    </a>
+
+</div>
+<div class="main">
+    <div class="topbar">
+        <h2>{% block title %}{% endblock %}</h2>
+        <a href="/logout">Logout</a>
+    </div>
+    {% block content %}{% endblock %}
+</div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+.page-title {
+    font-size: 26px;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+.table-card {
+    background: #f7f7f8;
+    border-radius: 20px;
+    border: 1px solid #d7dce6;
+    padding: 20px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th {
+    text-align: left;
+    padding: 14px;
+    font-size: 15px;
+    background: #eef1f6;
+}
+td {
+    padding: 14px;
+    border-top: 1px solid #e0e5ee;
+}
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+}
+.approved { background: #dff5e2; color: #2e7d32; }
+.pending { background: #fff4d6; color: #b78103; }
+</style>
+<div class="page-title">Drives</div>
+<div class="table-card">
+<table>
+    <tr>
+        <th>Company</th>
+        <th>Role</th>
+        <th>Status</th>
+    </tr>
+    {% for d in drives %}
+    <tr>
+        <td>
+            <a href="/admin/drive/{{ d.id }}">
+    {{ companies[d.company_id].company_name }}
+</a>
+        </td>
+        <td>{{ d.job_title }}</td>
+        <td>
+            <span class="status-badge {{ d.status }}">
+                {{ d.status }}
+            </span>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+</div>
+{% endblock %}

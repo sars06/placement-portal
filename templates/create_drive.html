@@ -1,0 +1,150 @@
+{% extends "base_public.html" %}
+{% block content %}
+<style>
+.page-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #0f1b33;
+    border-radius: 16px;
+}
+.page-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color:#ffffff;
+}
+.section-title {
+    margin: 25px 0 12px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #8fa8d6;
+}
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+.full {
+    grid-column: span 2;
+}
+label {
+    font-size: 14px;
+    margin-bottom: 6px;
+    color: #cbd5f5;
+}
+input, textarea, select {
+    background: #2f3f5c;
+    border: 1px solid #465a7b;
+    border-radius: 10px;
+    padding: 12px;
+    color: white;
+    font-size: 14px;
+}
+textarea {
+    min-height: 120px;
+}
+.btn-submit {
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    border: none;
+    background: linear-gradient(135deg, #4f8cff, #6c5ce7);
+    color: white;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    margin-top: 25px;
+}
+.btn-submit:hover {
+    opacity: 0.9;
+}
+@media (max-width: 768px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+    .full {
+        grid-column: span 1;
+    }
+    .page-container {
+        margin: 20px;
+        padding: 20px;
+    }
+}
+</style>
+<div class="page-container">
+    <div class="page-title">Create Placement Drive</div>
+    <form method="POST">
+        <div class="section-title">Basic Details</div>
+        <div class="form-grid">
+            <div class="form-group">
+                <label>Job Title</label>
+                <input name="job_title" required>
+            </div>
+            <div class="form-group">
+                <label>Package (CTC)</label>
+                <input name="package" placeholder="e.g. 12 LPA">
+            </div>
+            <div class="form-group">
+                <label>Location</label>
+                <input name="location">
+            </div>
+            <div class="form-group">
+                <label>Deadline</label>
+                <input type="date" name="deadline">
+            </div>
+            <div class="form-group">
+                <label>Job Type</label>
+                <select name="job_type">
+                    <option>Full-Time</option>
+                    <option>Internship</option>
+                    <option>Intern + FTE</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Work Mode</label>
+                <select name="mode">
+                    <option>Onsite</option>
+                    <option>Remote</option>
+                    <option>Hybrid</option>
+                </select>
+            </div>
+            <div class="form-group full">
+                <label>Description</label>
+                <textarea name="description"></textarea>
+            </div>
+        </div>
+        <div class="section-title">Eligibility Criteria</div>
+        <div class="form-grid">
+            <div class="form-group">
+                <label>Minimum CGPA</label>
+                <input name="cgpa" placeholder="e.g. 7.5">
+            </div>
+            <div class="form-group">
+                <label>Batch</label>
+                <input name="batch" placeholder="e.g. 2025">
+            </div>
+            <div class="form-group full">
+                <label>Eligible Branches</label>
+                <input name="branches" placeholder="CSE, IT, ECE...">
+            </div>
+            <div class="form-group full">
+                <label>Skills Required</label>
+                <input name="skills" placeholder="Python, DSA, React...">
+            </div>
+            <div class="form-group">
+                <label>Bond</label>
+                <select name="bond">
+                    <option>No</option>
+                    <option>Yes</option>
+                </select>
+            </div>
+        </div>
+        <button class="btn-submit">Submit for Approval</button>
+    </form>
+</div>
+{% endblock %}

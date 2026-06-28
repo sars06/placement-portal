@@ -1,0 +1,111 @@
+{% extends "base_student.html" %}
+{% block content %}
+<style>
+.history-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+}
+.app-card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+    transition: 0.2s;
+}
+.app-card:hover {
+    transform: translateY(-4px);
+}
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.company-name {
+    font-size: 18px;
+    font-weight: 600;
+}
+.app-details {
+    color: #64748b;
+    font-size: 14px;
+    margin-top: 8px;
+}
+.badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+.badge.pending {
+    background: #e2e8f0;
+    color: #475569;
+}
+.badge.shortlisted {
+    background: #dbeafe;
+    color: #2563eb;
+}
+.badge.selected {
+    background: #dcfce7;
+    color: #16a34a;
+}
+.badge.rejected {
+    background: #fee2e2;
+    color: #dc2626;
+}
+.page-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:40px;   
+}
+
+.page-header h2{
+    font-size:34px;       
+    font-weight:800;
+    color:#172033;
+    letter-spacing:-0.5px;
+    margin:0;
+}
+
+.app-count{
+    background:#dce8ff;
+    color:#2f66df;
+    padding:12px 22px;
+    border-radius:14px;
+    font-weight:700;
+    font-size:16px;
+}
+</style>
+<div class="page-header">
+
+    <h2>My Applications</h2>
+
+    <div class="app-count">
+        {{ applications|length }} Applications
+    </div>
+
+</div>
+<div class="history-grid">
+{% for app in applications %}
+<div class="app-card">
+    <div class="app-header">
+        <div class="company-name">
+            {{ Company.query.get(app.drive.company_id).company_name }}
+        </div>
+        <div class="badge {{ app.status }}">
+            {{ app.status.capitalize() }}
+        </div>
+    </div>
+    <div class="app-details">
+        <strong>Role:</strong> {{ app.drive.job_title }}
+    </div>
+    <div class="app-details">
+        {{ app.drive.location }} • {{ app.drive.package }}
+    </div>
+</div>
+{% else %}
+<p>No applications yet.</p>
+{% endfor %}
+</div>
+{% endblock %}

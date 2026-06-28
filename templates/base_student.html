@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Placement Portal</title>
+<!--
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #f1f5f9;
+}
+.sidebar {
+    width: 220px;
+    height: 100vh;
+    background: #17233b;
+    color: white;
+    padding: 20px;
+    position: fixed;
+}
+.sidebar h2 {
+    margin-bottom: 30px;
+}
+.sidebar a {
+    display: block;
+    color: #cbd5e1;
+    text-decoration: none;
+    margin: 15px 0;
+}
+.sidebar a:hover {
+    color: white;
+}
+.main {
+    margin-left: 240px;
+}
+.topbar {
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
+    gap: 15px;
+}
+.page-content {
+    padding: 30px;
+}
+</style>
+-->
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#dfe4ee;
+    color:#172033;
+}
+
+/* Sidebar */
+
+.sidebar{
+    width:240px;
+    height:100vh;
+    background:#17233b;
+    color:white;
+    position:fixed;
+    left:0;
+    top:0;
+    padding:20px;
+}
+
+.brand{
+    font-size:28px;
+    font-weight:800;
+    margin-bottom:40px;
+}
+
+.nav-section-title{
+    font-size:13px;
+    color:#7b8ba7;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    margin-bottom:15px;
+}
+
+.nav-link{
+    display:block;
+    color:#d7e2f5;
+    text-decoration:none;
+    padding:14px 16px;
+    border-radius:14px;
+    margin-bottom:8px;
+    transition:.25s;
+}
+
+.nav-link:hover{
+    background:#2c3850;
+    color:white;
+}
+
+/* Main */
+
+.main{
+    margin-left:240px;
+    min-height:100vh;
+}
+
+/* Topbar */
+
+.topbar{
+    background:#172129;
+    color:white;
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+    gap:15px;
+    padding:18px 30px;
+}
+
+.topbar-user{
+    font-size:16px;
+    font-weight:700;
+}
+
+.logout-btn{
+    text-decoration:none;
+    color:white;
+    border:1px solid rgba(255,255,255,.6);
+    padding:10px 18px;
+    border-radius:12px;
+    font-weight:700;
+    transition:.2s;
+}
+
+.logout-btn:hover{
+    background:white;
+    color:#172129;
+}
+
+/* Page */
+
+.page-content{
+    padding:30px;
+}
+
+/* Cards */
+
+.card{
+    background:white;
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 8px 20px rgba(0,0,0,.06);
+}
+
+/* Buttons */
+
+.btn-primary{
+    background:#2f66df;
+    color:white;
+    padding:12px 20px;
+    border-radius:12px;
+    text-decoration:none;
+}
+
+.btn-primary:hover{
+    opacity:.9;
+}
+
+@media(max-width:860px){
+
+.sidebar{
+    width:100%;
+    height:auto;
+    position:relative;
+}
+
+.main{
+    margin-left:0;
+}
+
+.page-content{
+    padding:20px;
+}
+
+}
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+
+<div class="brand">
+Placement Portal
+</div>
+
+<div class="nav-section-title">
+Student Panel
+</div>
+
+<a class="nav-link" href="/student/dashboard">
+Dashboard
+</a>
+
+<a class="nav-link" href="/student/drives">
+Open Drives
+</a>
+
+<a class="nav-link" href="/student/history">
+My Applications
+</a>
+
+<a class="nav-link" href="/student/profile">
+Edit Profile
+</a>
+
+</div>
+
+<div class="main">
+
+<div class="topbar">
+
+<div class="topbar-user">
+{{ session.get('username') }}
+</div>
+
+<a class="logout-btn" href="/logout">
+Logout
+</a>
+
+</div>
+
+<div class="page-content">
+
+{% block content %}
+{% endblock %}
+
+</div>
+
+</div>
+</body>
+</html>

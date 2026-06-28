@@ -1,0 +1,55 @@
+{% extends "base_public.html" %}
+{% block content %}
+<style>
+body {
+    background:#FAF9F6;
+    color: white;
+    font-family: Arial;
+}
+.form-box {
+    width: 520px;
+    margin: auto;
+    margin-top: 50px;
+    background: #1e2f47;
+    padding: 25px;
+    border-radius: 12px;
+}
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 6px;
+    border: none;
+}
+button {
+    width: 100%;
+    padding: 10px;
+    background: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 6px;
+}
+h2 {
+    text-align: center;
+}
+</style>
+<div class="form-box">
+    <h2>Company Registration</h2>
+    <form method="POST">
+        <input name="username" placeholder="Username" required>
+        <input name="password" placeholder="Password" required>
+        <input name="company_name" placeholder="Company Name" required>
+        <input name="hr_name" placeholder="HR Name">
+        <input name="email" placeholder="Email">
+        <input name="phone" placeholder="Phone">
+        <input name="industry" placeholder="Industry (IT, Finance...)">
+        <input name="website" placeholder="Website URL">
+        <input name="location" placeholder="Location">
+        <textarea name="description" placeholder="Company Description"></textarea>
+        <button type="submit">Register</button>
+    </form>
+    <p style="text-align:center; margin-top:10px;">
+        Already registered? <a href="/login" style="color:#3b82f6;">Login</a>
+    </p>
+</div>
+{% endblock %}

@@ -1,0 +1,263 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+
+.hero{
+    background:linear-gradient(90deg,#2f66df,#6f38f0);
+    border-radius:22px;
+    padding:28px 36px;
+    color:white;
+    margin-bottom:28px;
+}
+
+.hero h2{
+    font-size:36px;
+    font-weight:800;
+    margin-bottom:6px;
+}
+
+.hero p{
+    font-size:18px;
+    opacity:.92;
+}
+
+.details-card{
+    background:white;
+    border-radius:20px;
+    padding:28px;
+    box-shadow:0 8px 20px rgba(0,0,0,.06);
+}
+
+.compact-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+    margin-bottom:24px;
+}
+
+.compact-item{
+    background:#f8fafc;
+    border:1px solid #dbe5f2;
+    border-radius:14px;
+    padding:16px;
+}
+
+.label{
+    display:block;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    color:#64748b;
+    font-weight:700;
+    margin-bottom:8px;
+}
+
+.value{
+    font-size:18px;
+    font-weight:700;
+    color:#172033;
+}
+
+.description-box{
+    background:#f8fafc;
+    border:1px solid #dbe5f2;
+    border-radius:16px;
+    padding:20px;
+    margin-bottom:25px;
+}
+
+.description-title{
+    font-size:13px;
+    text-transform:uppercase;
+    font-weight:700;
+    color:#64748b;
+    margin-bottom:10px;
+}
+
+.description-text{
+    color:#475569;
+    line-height:1.7;
+    font-size:15px;
+}
+
+.status{
+    display:inline-block;
+    padding:7px 16px;
+    border-radius:999px;
+    font-size:14px;
+    font-weight:700;
+}
+
+.status-approved{
+    background:#dcfce7;
+    color:#15803d;
+}
+
+.status-pending{
+    background:#fef3c7;
+    color:#b45309;
+}
+
+.status-rejected{
+    background:#fee2e2;
+    color:#dc2626;
+}
+
+.actions{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    text-decoration:none;
+    padding:12px 22px;
+    border-radius:12px;
+    font-weight:700;
+    transition:.2s;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+}
+
+.btn-approve{
+    background:#22c55e;
+    color:white;
+}
+
+.btn-reject{
+    background:#ef4444;
+    color:white;
+}
+
+.btn-back{
+    background:#2f66df;
+    color:white;
+}
+
+@media(max-width:1200px){
+
+.compact-grid{
+    grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+@media(max-width:700px){
+
+.compact-grid{
+    grid-template-columns:1fr;
+}
+
+.hero h2{
+    font-size:30px;
+}
+
+}
+
+</style>
+
+<div class="hero">
+
+    <h2>{{ drive.job_title }}</h2>
+
+    <p>{{ company.company_name }}</p>
+
+</div>
+
+<div class="details-card">
+
+    <div class="compact-grid">
+
+        <div class="compact-item">
+            <span class="label">Company</span>
+            <span class="value">{{ company.company_name }}</span>
+        </div>
+
+        <div class="compact-item">
+            <span class="label">Role</span>
+            <span class="value">{{ drive.job_title }}</span>
+        </div>
+
+        <div class="compact-item">
+            <span class="label">Location</span>
+            <span class="value">{{ drive.location }}</span>
+        </div>
+
+        <div class="compact-item">
+            <span class="label">Package</span>
+            <span class="value">{{ drive.package }}</span>
+        </div>
+
+        <div class="compact-item">
+            <span class="label">Minimum CGPA</span>
+            <span class="value">{{ drive.cgpa }}</span>
+        </div>
+
+        <div class="compact-item">
+            <span class="label">Eligible Branches</span>
+            <span class="value">{{ drive.branches }}</span>
+        </div>
+
+        <div class="compact-item">
+            <span class="label">Last Date</span>
+            <span class="value">{{ drive.deadline }}</span>
+        </div>
+
+        <div class="compact-item">
+
+            <span class="label">Status</span>
+
+            {% if drive.status == "approved" %}
+                <span class="status status-approved">Approved</span>
+            {% elif drive.status == "pending" %}
+                <span class="status status-pending">Pending</span>
+            {% else %}
+                <span class="status status-rejected">Rejected</span>
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    <div class="description-box">
+
+        <div class="description-title">
+            Job Description
+        </div>
+
+        <div class="description-text">
+            {{ drive.description }}
+        </div>
+
+    </div>
+
+    <div class="actions">
+
+        {% if drive.status == 'pending' %}
+
+        <a href="/admin/drive/approve/{{ drive.id }}"
+           class="btn btn-approve">
+            ✓ Approve
+        </a>
+
+        <a href="/admin/drive/reject/{{ drive.id }}"
+           class="btn btn-reject">
+            ✕ Reject
+        </a>
+
+        {% endif %}
+
+        <a href="/admin/drives"
+           class="btn btn-back">
+            ← Back to Drives
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

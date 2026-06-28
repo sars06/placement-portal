@@ -1,0 +1,34 @@
+{% extends "base_public.html" %}
+{% block content %}
+<style>
+body { background:#0b1a2b; color:white; }
+table {
+    width:80%;
+    margin:auto;
+    background:#1e2f47;
+}
+td, th { padding:10px; }
+button { padding:6px; }
+</style>
+<h2 style="text-align:center;">Applicants</h2>
+<table>
+<tr>
+<th>Name</th>
+<th>CGPA</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+{% for app, student in data %}
+<tr>
+<td>{{student.full_name}}</td>
+<td>{{student.cgpa}}</td>
+<td>{{app.status}}</td>
+<td>
+    <a href="/company/application/{{a.id}}/Shortlisted" class="btn shortlist">Shortlist</a>
+    <a href="/company/application/{{a.id}}/Selected" class="btn select">Select</a>
+    <a href="/company/application/{{a.id}}/Rejected" class="btn reject">Reject</a>
+</td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}

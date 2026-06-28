@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+    <h2>{{ company.company_name }}</h2>
+    <p><b>HR Name:</b> {{ company.hr_name }}</p>
+    <p><b>Email:</b> {{ company.email }}</p>
+    <p><b>Phone:</b> {{ company.phone }}</p>
+    <p><b>Website:</b> {{ company.website }}</p>
+    <p><b>Industry:</b> {{ company.industry }}</p>
+    <p><b>Location:</b> {{ company.location }}</p>
+    <p><b>Description:</b> {{ company.description }}</p>
+    <p><b>Status:</b> {{ company.status }}</p>
+    <br>
+    <a href="/admin/company/approve/{{ company.id }}">Approve</a>
+    <a href="/admin/company/reject/{{ company.id }}">Reject</a>
+</div>
+{% endblock %}

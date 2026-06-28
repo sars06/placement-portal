@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Applications</h2>
+<div class="table">
+<table>
+<tr>
+    <th>ID</th>
+    <th>Student</th>
+    <th>Drive</th>
+    <th>Status</th>
+    <th>Action</th>
+</tr>
+{% for app in applications %}
+<tr>
+    <td>{{ app.id }}</td>
+    <td>{{ app.student_roll }}</td>
+    <td>{{ app.drive_id }}</td>
+    <td>{{ app.status }}</td>
+    <td>
+        <a href="/admin/update_status/{{ app.id }}/Selected">Select</a>
+        <a href="/admin/update_status/{{ app.id }}/Rejected">Reject</a>
+    </td>
+</tr>
+{% endfor %}
+</table>
+</div>
+{% endblock %}

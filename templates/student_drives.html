@@ -1,0 +1,255 @@
+{% extends "base_student.html" %}
+{% block content %}
+
+<style>
+
+.page-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.page-header h2{
+    font-size:34px;
+    font-weight:900;
+    color:#172033;
+}
+
+.drive-count{
+    background:#dce8ff;
+    color:#2f66df;
+    padding:12px 22px;
+    border-radius:14px;
+    font-weight:700;
+}
+
+.drive-card{
+    background:#ffffff;
+    border-radius:22px;
+    border-left:6px solid #2f66df;
+    padding:28px;
+    margin-bottom:28px;
+    box-shadow:0 8px 22px rgba(0,0,0,.08);
+    transition:.25s;
+}
+
+.drive-card:hover{
+    transform:translateY(-4px);
+}
+
+.drive-title{
+    font-size:27px;
+    font-weight:800;
+    color:#2f66df;
+    margin-bottom:22px;
+}
+
+.drive-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:35px;
+}
+
+.section-title{
+    font-size:18px;
+    font-weight:700;
+    margin-bottom:12px;
+    color:#172033;
+}
+
+.info-row{
+    margin-bottom:14px;
+    font-size:17px;
+    color:#49566e;
+    line-height:1.6;
+}
+
+.info-row b{
+    color:#172033;
+}
+
+.description{
+    line-height:1.8;
+    color:#55657f;
+}
+
+.apply-btn{
+    display:inline-block;
+    margin-top:25px;
+    background:#2f66df;
+    color:white;
+    text-decoration:none;
+    padding:14px 34px;
+    border-radius:14px;
+    font-weight:700;
+    transition:.2s;
+}
+
+.apply-btn:hover{
+    background:#1f4fb8;
+}
+
+.empty{
+    text-align:center;
+    padding:60px;
+    font-size:20px;
+    color:#6b7280;
+}
+
+@media(max-width:900px){
+
+.drive-grid{
+    grid-template-columns:1fr;
+}
+
+.page-header{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:15px;
+}
+
+}
+
+</style>
+
+
+<div class="page-header">
+
+    <h2>Open Drives</h2>
+
+    <div class="drive-count">
+        {{ drives|length }} Open Drives
+    </div>
+
+</div>
+
+
+{% if drives %}
+
+{% for d in drives %}
+
+<div class="drive-card">
+
+    <div class="drive-title">
+        {{ d.job_title }} - {{ companies[d.company_id].company_name }}
+    </div>
+
+    <div class="drive-grid">
+
+        <div>
+
+            <div class="section-title">
+                Drive Information
+            </div>
+
+            <div class="info-row">
+                <b>Company:</b>
+                {{ companies[d.company_id].company_name }}
+            </div>
+
+            <div class="info-row">
+                <b>Location:</b>
+                {{ d.location }}
+            </div>
+
+            <div class="info-row">
+                <b>Package:</b>
+                {{ d.package }}
+            </div>
+
+            <div class="info-row">
+                <b>Deadline:</b>
+                {{ d.deadline }}
+            </div>
+
+            {% if d.cgpa %}
+            <div class="info-row">
+                <b>Minimum CGPA:</b>
+                {{ d.cgpa }}
+            </div>
+            {% endif %}
+
+            {% if d.branches %}
+            <div class="info-row">
+                <b>Eligible Branches:</b>
+                {{ d.branches }}
+            </div>
+            {% endif %}
+
+            {% if d.skills %}
+            <div class="info-row">
+                <b>Required Skills:</b>
+                {{ d.skills }}
+            </div>
+            {% endif %}
+
+            {% if d.job_type %}
+            <div class="info-row">
+                <b>Job Type:</b>
+                {{ d.job_type }}
+            </div>
+            {% endif %}
+
+            {% if d.mode %}
+            <div class="info-row">
+                <b>Mode:</b>
+                {{ d.mode }}
+            </div>
+            {% endif %}
+
+            {% if d.bond %}
+            <div class="info-row">
+                <b>Bond:</b>
+                {{ d.bond }}
+            </div>
+            {% endif %}
+
+        </div>
+
+
+        <div>
+
+            <div class="section-title">
+                Job Description
+            </div>
+
+            {% if d.description %}
+            <div class="description">
+                {{ d.description }}
+            </div>
+            {% endif %}
+
+            {% if d.eligibility %}
+            <br>
+
+            <div class="section-title">
+                Eligibility Criteria
+            </div>
+
+            <div class="description">
+                {{ d.eligibility }}
+            </div>
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    <a href="/apply/{{ d.id }}" class="apply-btn">
+        Apply Now
+    </a>
+
+</div>
+
+{% endfor %}
+
+{% else %}
+
+<div class="empty">
+    No placement drives are available at the moment.
+</div>
+
+{% endif %}
+
+{% endblock %}

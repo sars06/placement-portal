@@ -1,0 +1,112 @@
+{% extends "base_public.html" %}
+{% block content %}
+<style>
+.page-title {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.sub-text {
+    color: #9fb3d9;
+    margin-bottom: 20px;
+}
+.card {
+    background: #1e2f47;
+    padding: 20px;
+    border-radius: 14px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th {
+    text-align: left;
+    padding: 14px;
+    background: #243a5e;
+    font-weight: 500;
+    color:#ffffff;
+}
+td {
+    padding: 14px;
+    border-bottom: 1px solid #2f4a70;
+    color:#ffffff;
+}
+tr:hover {
+    background: #243a5e;
+}
+.status {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+.pending { background: #facc15; color: black; }
+.shortlisted { background: #3b82f6; }
+.selected { background: #22c55e; }
+.rejected { background: #ef4444; }
+.btn {
+    padding: 6px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 13px;
+    margin-right: 5px;
+    display: inline-block;
+}
+.btn-shortlist { background: #3b82f6; color: white; }
+.btn-select { background: #22c55e; color: white; }
+.btn-reject { background: #ef4444; color: white; }
+.resume {
+    color: #60a5fa;
+    text-decoration: none;
+}
+</style>
+<div class="page-title">Applications</div>
+<div class="sub-text">Total Applications: {{ apps|length }}</div>
+<div class="card">
+{% if apps|length == 0 %}
+    <p>No applications yet.</p>
+{% else %}
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Branch</th>
+        <th>CGPA</th>
+        <th>Resume</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+    {% for a in apps %}
+    <tr>
+        <td>{{ a.student.full_name }}</td>
+        <td>{{ a.student.branch }}</td>
+        <td>{{ a.student.cgpa }}</td>
+        <td>
+            {% if a.student.resume %}
+                <a href="/static/resumes/{{ a.student.resume }}" target="_blank" class="resume">
+                    View Resume
+                </a>
+            {% else %}
+                -
+            {% endif %}
+        </td>
+        <td>
+            <span class="status 
+                {% if a.status == 'pending' %}pending
+                {% elif a.status == 'Shortlisted' %}shortlisted
+                {% elif a.status == 'Selected' %}selected
+                {% elif a.status == 'Rejected' %}rejected
+                {% endif %}
+            ">
+                {{ a.status }}
+            </span>
+        </td>
+        <td>
+            <a href="/company/application/{{a.id}}/Shortlisted" class="btn btn-shortlist">Shortlist</a>
+            <a href="/company/application/{{a.id}}/Selected" class="btn btn-select">Select</a>
+            <a href="/company/application/{{a.id}}/Rejected" class="btn btn-reject">Reject</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+</div>
+{% endblock %}

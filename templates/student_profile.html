@@ -1,0 +1,74 @@
+{% extends "base_student.html" %}
+{% block content %}
+<style>
+body {
+    background: #dfe4ee;
+    color: white;
+    font-family: Arial;
+}
+.form-box {
+    width: 400px;
+    margin: auto;
+    background: #1e2f47;
+    padding: 25px;
+    border-radius: 12px;
+}
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 6px;
+    border: none;
+}
+button {
+    width: 100%;
+    padding: 10px;
+    background: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    margin-top: 10px;
+}
+.resume-box {
+    margin-top: 20px;
+    padding: 15px;
+    background: #162436;
+    border-radius: 10px;
+}
+</style>
+<div class="form-box">
+    <h2>Edit Profile</h2>
+    <form method="POST">
+        <input name="full_name" value="{{student.full_name}}" placeholder="Full Name">
+        <input name="email" value="{{student.email}}" placeholder="Email">
+        <input name="phone" value="{{student.phone}}" placeholder="Phone">
+        <select name="branch">
+            <option value="">Select Branch</option>
+            <option value="CSE" {% if student.branch=='CSE' %}selected{% endif %}>CSE</option>
+            <option value="CSD" {% if student.branch=='CSD' %}selected{% endif %}>CSD</option>
+            <option value="ECE" {% if student.branch=='ECE' %}selected{% endif %}>ECE</option>
+            <option value="EEE" {% if student.branch=='EEE' %}selected{% endif %}>EEE</option>
+            <option value="MECH" {% if student.branch=='MECH' %}selected{% endif %}>MECH</option>
+            <option value="CIVIL" {% if student.branch=='CIVIL' %}selected{% endif %}>CIVIL</option>
+        </select>
+        <input name="cgpa" value="{{student.cgpa}}" placeholder="CGPA">
+        <input name="grad_year" value="{{student.grad_year}}" placeholder="Grad Year">
+        <button type="submit">Update</button>
+    </form>
+    <div class="resume-box">
+        <h3>Resume</h3>
+        <form action="/student/upload_resume" method="POST" enctype="multipart/form-data">
+            <input type="file" name="resume" required>
+            <button type="submit">Upload Resume</button>
+        </form>
+        {% if student.resume %}
+            <p>Uploaded: {{ student.resume }}</p>
+            <a href="{{ url_for('static', filename='resumes/' + student.resume) }}" target="_blank" style="color:#3b82f6;">
+                View Resume
+            </a>
+        {% else %}
+            <p>No resume uploaded</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
